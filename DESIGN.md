@@ -1,3 +1,5 @@
+# High-Level Design
+
 A high-level design document  (must be in Markdown). It should include the following (at a minimum):
 
 1. Project motivation: why are you doing it? Who will it benefit (students, senior citizens, teachers, disabled, travelers, etc.)
@@ -8,3 +10,31 @@ A high-level design document  (must be in Markdown). It should include the follo
 
 4. List of external data sources or services that will be used.
 - We will add in a map into the website so possibly we will be using leaflet. We will add in libraries with UI tools for the frontend but I am not sure which ones yet. 
+
+**CORE GOALS:**  
+- Riders can request rides quickly and easily from their phone on the website.
+- Drivers can receive the ride requests, accept them, and update the status.
+- Business owners can manage rides/ view past rides/ and basic settings.
+
+**MAIN USER TYPES:**  
+1. The Rider
+      - Requests the rides from the website
+      - See the wait time, status, and the driver information possibly.
+      - Receive updates from driver if driver sends some.
+2. The Driver
+      - See incoming requests real time and on a map.
+      - Accepts or declines request
+      - Can send message to requester.
+3. Business Owners
+      - Can view all rides in the past and present
+      - Manage owners accounts.
+      - Configures the updates on the pages with prices or specialties going on.
+
+**ARCHITECTURE**  
+Frontend (React + vite)  
+        |  
+BackendAPI (Node.js + Express)  
+        |   
+Database (MongoDB/ PostgreSQL)  
+
+
