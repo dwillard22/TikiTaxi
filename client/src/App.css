@@ -39,14 +39,79 @@ body {
 
 /* Header */
 .header {
-  background: linear-gradient(135deg, var(--primary-teal) 0%, var(--support-green) 100%);
+  background: linear-gradient(135deg, var(--primary-teal) 0%, var(--support-green) 50%, var(--primary-teal) 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
   color: white;
   padding: 1rem 0;
   position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   z-index: 1000;
-  box-shadow: 0 2px 15px rgba(44, 124, 123, 0.2);
+  box-shadow: 
+    0 4px 20px rgba(44, 124, 123, 0.4),
+    0 2px 10px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  border-bottom: 4px solid var(--primary-orange);
+}
+
+.header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      45deg,
+      transparent,
+      transparent 10px,
+      rgba(245, 166, 35, 0.05) 10px,
+      rgba(245, 166, 35, 0.05) 20px
+    );
+  pointer-events: none;
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    var(--primary-orange) 0%,
+    var(--support-coral) 25%,
+    var(--primary-orange) 50%,
+    var(--support-coral) 75%,
+    var(--primary-orange) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .nav {
@@ -56,12 +121,36 @@ body {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .nav-brand h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: white;
+  font-family: 'Luckiest Guy', 'Cooper Black', 'Chunk Five', cursive;
+  font-size: 2.2rem;
+  font-weight: 900;
+  color: var(--primary-orange);
+  text-shadow: 
+    -4px -4px 0 var(--primary-teal),
+    4px -4px 0 var(--primary-teal),
+    -4px 4px 0 var(--primary-teal),
+    4px 4px 0 var(--primary-teal),
+    6px 6px 10px rgba(0, 0, 0, 0.4);
+  letter-spacing: 3px;
+  transform: rotate(-1.5deg);
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.1;
+  filter: drop-shadow(3px 3px 6px rgba(0, 0, 0, 0.3));
+  position: relative;
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.nav-brand h1:hover {
+  transform: rotate(1deg) scale(1.05);
+  filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.4));
 }
 
 .nav-links {
@@ -73,40 +162,82 @@ body {
 .nav-links a {
   color: white;
   text-decoration: none;
-  font-weight: 500;
-  transition: opacity 0.3s ease;
-  font-size: 1rem;
+  font-family: 'Luckiest Guy', 'Cooper Black', 'Chunk Five', cursive;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  text-shadow: 
+    -2px -2px 0 rgba(0, 0, 0, 0.3),
+    2px -2px 0 rgba(0, 0, 0, 0.3),
+    -2px 2px 0 rgba(0, 0, 0, 0.3),
+    2px 2px 0 rgba(0, 0, 0, 0.3),
+    3px 3px 6px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0.5rem 0;
 }
 
 .nav-links a:hover {
-  opacity: 0.9;
+  color: var(--primary-orange);
+  transform: translateY(-2px) scale(1.05);
+  text-shadow: 
+    -2px -2px 0 var(--primary-teal),
+    2px -2px 0 var(--primary-teal),
+    -2px 2px 0 var(--primary-teal),
+    2px 2px 0 var(--primary-teal),
+    4px 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .cta-button {
-  background: var(--primary-orange);
+  background: linear-gradient(135deg, var(--primary-orange) 0%, var(--support-coral) 100%);
   color: white;
-  border: none;
+  border: 3px solid var(--primary-teal);
   padding: 0.75rem 1.5rem;
   border-radius: 25px;
-  font-weight: 600;
+  font-family: 'Luckiest Guy', 'Cooper Black', 'Chunk Five', cursive;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
   cursor: pointer;
   transition: all 0.3s ease;
   text-decoration: none;
   display: inline-block;
+  text-shadow: 
+    -2px -2px 0 rgba(0, 0, 0, 0.3),
+    2px -2px 0 rgba(0, 0, 0, 0.3),
+    -2px 2px 0 rgba(0, 0, 0, 0.3),
+    2px 2px 0 rgba(0, 0, 0, 0.3);
+  box-shadow: 
+    0 4px 8px rgba(0, 0, 0, 0.2),
+    inset 0 2px 4px rgba(255, 255, 255, 0.2);
+  transform: rotate(-0.5deg);
 }
 
 .cta-button:hover {
-  background: var(--support-coral);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(245, 166, 35, 0.3);
+  background: linear-gradient(135deg, var(--support-coral) 0%, var(--primary-orange) 100%);
+  transform: translateY(-3px) rotate(0.5deg) scale(1.05);
+  box-shadow: 
+    0 6px 12px rgba(245, 166, 35, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.3);
+  border-color: var(--primary-orange);
+}
+
+.cta-button.logout-button {
+  background: linear-gradient(135deg, var(--support-coral) 0%, #E8734E 100%);
+}
+
+.cta-button.logout-button:hover {
+  background: linear-gradient(135deg, #E8734E 0%, var(--support-coral) 100%);
 }
 
 /* Hero Section */
 .hero {
   background: linear-gradient(135deg, var(--primary-aqua) 0%, var(--support-cream) 100%);
   color: var(--support-brown);
-  padding: 140px 0 80px;
-  min-height: 100vh;
+  padding: 100px 0 60px;
+  min-height: calc(100vh - 80px);
   display: flex;
   align-items: center;
 }
@@ -344,9 +475,53 @@ body {
 
 /* Footer */
 .footer {
-  background: var(--support-brown);
-  color: white;
+  background: linear-gradient(135deg, var(--support-cream) 0%, var(--primary-aqua) 50%, var(--support-cream) 100%);
+  background-size: 200% 200%;
+  animation: gradientShift 8s ease infinite;
+  color: var(--support-brown);
   padding: 60px 0 20px;
+  position: relative;
+  box-shadow: 
+    0 -4px 20px rgba(168, 216, 216, 0.4),
+    0 -2px 10px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border-top: 4px solid var(--primary-orange);
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    repeating-linear-gradient(
+      -45deg,
+      transparent,
+      transparent 10px,
+      rgba(245, 166, 35, 0.08) 10px,
+      rgba(245, 166, 35, 0.08) 20px
+    );
+  pointer-events: none;
+}
+
+.footer::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, 
+    var(--primary-orange) 0%,
+    var(--support-coral) 25%,
+    var(--primary-orange) 50%,
+    var(--support-coral) 75%,
+    var(--primary-orange) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 3s linear infinite;
 }
 
 .footer-content {
@@ -354,25 +529,48 @@ body {
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 2rem;
   margin-bottom: 2rem;
+  position: relative;
+  z-index: 1;
 }
 
 .footer-section h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
+  font-family: 'Luckiest Guy', 'Cooper Black', 'Chunk Five', cursive;
+  font-size: 1.8rem;
+  font-weight: 900;
   margin-bottom: 1rem;
   color: var(--primary-orange);
+  text-shadow: 
+    -2px -2px 0 var(--primary-teal),
+    2px -2px 0 var(--primary-teal),
+    -2px 2px 0 var(--primary-teal),
+    2px 2px 0 var(--primary-teal),
+    3px 3px 6px rgba(0, 0, 0, 0.2);
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(-0.5deg);
 }
 
 .footer-section h4 {
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-family: 'Luckiest Guy', 'Cooper Black', 'Chunk Five', cursive;
+  font-size: 1.3rem;
+  font-weight: 700;
   margin-bottom: 1rem;
-  color: var(--primary-aqua);
+  color: var(--primary-teal);
+  text-shadow: 
+    -1px -1px 0 rgba(255, 255, 255, 0.5),
+    1px -1px 0 rgba(255, 255, 255, 0.5),
+    -1px 1px 0 rgba(255, 255, 255, 0.5),
+    1px 1px 0 rgba(255, 255, 255, 0.5),
+    2px 2px 4px rgba(0, 0, 0, 0.1);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
 }
 
 .footer-section p {
-  color: #e0e0e0;
+  color: var(--support-brown);
   line-height: 1.6;
+  font-weight: 500;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 .footer-section ul {
@@ -384,13 +582,22 @@ body {
 }
 
 .footer-section ul li a {
-  color: #e0e0e0;
+  color: var(--support-brown);
   text-decoration: none;
-  transition: color 0.3s ease;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+  display: inline-block;
 }
 
 .footer-section ul li a:hover {
-  color: var(--primary-aqua);
+  color: var(--primary-orange);
+  transform: translateX(5px) scale(1.05);
+  text-shadow: 
+    -1px -1px 0 var(--primary-teal),
+    1px -1px 0 var(--primary-teal),
+    -1px 1px 0 var(--primary-teal),
+    1px 1px 0 var(--primary-teal);
 }
 
 .social-links {
@@ -401,21 +608,43 @@ body {
 }
 
 .social-links a {
-  color: #e0e0e0;
+  color: var(--support-brown);
   text-decoration: none;
-  transition: color 0.3s ease;
-  font-size: 0.95rem;
+  font-family: 'Luckiest Guy', 'Cooper Black', 'Chunk Five', cursive;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.3);
+  border: 2px solid transparent;
 }
 
 .social-links a:hover {
-  color: var(--primary-aqua);
+  color: var(--primary-orange);
+  background: rgba(245, 166, 35, 0.2);
+  border-color: var(--primary-teal);
+  transform: translateY(-2px) scale(1.05);
+  text-shadow: 
+    -1px -1px 0 var(--primary-teal),
+    1px -1px 0 var(--primary-teal),
+    -1px 1px 0 var(--primary-teal),
+    1px 1px 0 var(--primary-teal);
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 2px solid rgba(245, 166, 35, 0.4);
   padding-top: 2rem;
   text-align: center;
-  color: #b0b0b0;
+  color: var(--support-brown);
+  position: relative;
+  z-index: 1;
+  font-weight: 600;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.5);
 }
 
 /* Responsive Design */
@@ -430,7 +659,7 @@ body {
   }
   
   .hero {
-    padding: 120px 0 60px;
+    padding: 90px 0 50px;
   }
 
   .hero-content {

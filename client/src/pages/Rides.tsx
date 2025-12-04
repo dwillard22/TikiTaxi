@@ -1,9 +1,21 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import './Rides.css';
 import '../App.css';
 
 const Rides: React.FC = () => {
+  const navigate = useNavigate();
+  const [user, setUser] = useState<any>(null);
+
+  useEffect(() => {
+    // Check if user is logged in
+    const userData = localStorage.getItem('user');
+    if (!userData) {
+      navigate('/login');
+    } else {
+      setUser(JSON.parse(userData));
+    }
+  }, [navigate]);
   const [pickup, setPickup] = useState('');
   const [destination, setDestination] = useState('');
   const [phone, setPhone] = useState('');
@@ -22,6 +34,16 @@ const Rides: React.FC = () => {
     }, 1000);
   };
 
+  // Show loading or redirect if not logged in
+  if (!user) {
+    return null;
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('user');
+    navigate('/');
+  };
+
   return (
     <div className="app">
       <header className="header">
@@ -34,6 +56,9 @@ const Rides: React.FC = () => {
           <div className="nav-links">
             <Link to="/">Home</Link>
             <Link to="/rides">Request Ride</Link>
+            <button onClick={handleLogout} className="cta-button logout-button">
+              Logout
+            </button>
           </div>
         </nav>
       </header>

@@ -1,8 +1,47 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useRef } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
 const Home: React.FC = () => {
+  const navigate = useNavigate();
+  const iframeRef = useRef<HTMLIFrameElement>(null);
+
+  const handleBookRide = () => {
+    const user = localStorage.getItem('user');
+    if (user) {
+      navigate('/rides');
+    } else {
+      navigate('/login');
+    }
+  };
+
+  useEffect(() => {
+    const iframe = iframeRef.current;
+    if (!iframe) return;
+
+    // Instagram reels autoplay by default, but to ensure continuous looping,
+    // we'll reload the iframe periodically to restart the video
+    const reloadVideo = () => {
+      if (iframe && iframe.src) {
+        const currentSrc = iframe.src;
+        // Temporarily clear src, then restore to trigger reload
+        iframe.src = '';
+        setTimeout(() => {
+          if (iframe) {
+            iframe.src = currentSrc;
+          }
+        }, 100);
+      }
+    };
+
+    // Reload every 30 seconds to create continuous loop
+    // Adjust timing based on your video length (reload slightly before video ends)
+    const reloadInterval = setInterval(reloadVideo, 30000);
+
+    return () => {
+      clearInterval(reloadInterval);
+    };
+  }, []);
 
   return (
     <div className="app">
@@ -14,8 +53,8 @@ const Home: React.FC = () => {
           </div>
           <div className="nav-links">
             <Link to="/">Home</Link>
-            <Link to="/rides">Request Ride</Link>
-            <Link to="/rides" className="cta-button">Book Now</Link>
+            <Link to="/login">Login</Link>
+            <Link to="/signup" className="cta-button">Sign Up</Link>
           </div>
         </nav>
       </header>
@@ -31,12 +70,13 @@ const Home: React.FC = () => {
               Skip the walk, avoid the parking hassle, and get around Hampton Beach safely with our eco-friendly golf cart taxi service.
             </p>
             <div className="hero-buttons">
-              <Link to="/rides" className="primary-button">Book Your Ride Now</Link>
+              <button onClick={handleBookRide} className="primary-button">Book Your Ride Now</button>
               <a href="#features" className="secondary-button">Learn More</a>
             </div>
           </div>
           <div className="hero-video">
             <iframe
+              ref={iframeRef}
               src="https://www.instagram.com/reel/DRqAYtQDrnB/embed/"
               width="100%"
               height="650"
@@ -114,7 +154,7 @@ const Home: React.FC = () => {
         <div className="container">
           <h2>Ready to Ride?</h2>
           <p>Join hundreds of satisfied customers who choose TikiTaxi for safe, convenient transportation.</p>
-          <Link to="/rides" className="primary-button large">Book Your First Ride</Link>
+          <button onClick={handleBookRide} className="primary-button large">Book Your First Ride</button>
         </div>
       </section>
 
@@ -146,7 +186,7 @@ const Home: React.FC = () => {
             </div>
           </div>
           <div className="footer-bottom">
-            <p>&copy; 2024 TikiTaxi. All rights reserved.</p>
+            <p>&copy; 2025 TikiTaxi. All rights reserved.</p>
           </div>
         </div>
       </footer>

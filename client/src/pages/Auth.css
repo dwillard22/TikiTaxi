@@ -1,0 +1,132 @@
+.auth-page {
+  min-height: calc(100vh - 80px);
+  padding: 2rem 1rem;
+  margin-top: 80px;
+  background: linear-gradient(135deg, #F4E4C1 0%, #A8D8D8 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-container {
+  max-width: 500px;
+  width: 100%;
+  background: white;
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 40px rgba(44, 124, 123, 0.15);
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2C7C7B;
+  margin-bottom: 0.5rem;
+}
+
+.auth-header p {
+  color: #5D4037;
+  font-size: 1.1rem;
+}
+
+.error-message {
+  background: #E8734E;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #2C7C7B;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  padding: 1rem;
+  border: 2px solid #A8D8D8;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #F4E4C1;
+  color: #5D4037;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #F5A623;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.1);
+}
+
+.auth-button {
+  background: linear-gradient(135deg, #F5A623 0%, #E8734E 100%);
+  color: white;
+  border: none;
+  padding: 1.25rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.auth-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(245, 166, 35, 0.3);
+}
+
+.auth-footer {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 2px solid #A8D8D8;
+}
+
+.auth-footer p {
+  color: #5D4037;
+  font-size: 1rem;
+}
+
+.auth-link {
+  color: #F5A623;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.auth-link:hover {
+  color: #E8734E;
+}
+
+@media (max-width: 768px) {
+  .auth-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .auth-header h1 {
+    font-size: 2rem;
+  }
+}
+
