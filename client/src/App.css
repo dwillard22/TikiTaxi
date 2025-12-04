@@ -144,10 +144,12 @@ body {
   max-width: 500px;
   min-width: 400px;
   border-radius: 12px;
-  /* Clip the bottom portion to hide like/comment/share/save buttons */
-  clip-path: inset(0 0 60px 0);
-  -webkit-clip-path: inset(0 0 60px 0);
-  margin-bottom: -70px;
+  /* Clip top (header) and middle (buttons), keep bottom (view profile) */
+  clip-path: inset(65px 0 0 0);
+  -webkit-clip-path: inset(65px 0 0 0);
+  margin-top: -65px;
+  height: 720px;
+  overflow: hidden;
 }
 
 .hero-title {

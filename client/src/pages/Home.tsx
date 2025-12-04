@@ -39,7 +39,7 @@ const Home: React.FC = () => {
             <iframe
               src="https://www.instagram.com/reel/DRqAYtQDrnB/embed/"
               width="100%"
-              height="600"
+              height="650"
               style={{ border: 'none', overflow: 'hidden' }}
               scrolling="no"
               frameBorder="0"
