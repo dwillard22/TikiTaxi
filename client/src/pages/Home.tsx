@@ -1,10 +1,9 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import '../App.css';
 
 const Home: React.FC = () => {
   const navigate = useNavigate();
-  const iframeRef = useRef<HTMLIFrameElement>(null);
 
   const handleBookRide = () => {
     const user = localStorage.getItem('user');
@@ -14,34 +13,6 @@ const Home: React.FC = () => {
       navigate('/login');
     }
   };
-
-  useEffect(() => {
-    const iframe = iframeRef.current;
-    if (!iframe) return;
-
-    // Instagram reels autoplay by default, but to ensure continuous looping,
-    // we'll reload the iframe periodically to restart the video
-    const reloadVideo = () => {
-      if (iframe && iframe.src) {
-        const currentSrc = iframe.src;
-        // Temporarily clear src, then restore to trigger reload
-        iframe.src = '';
-        setTimeout(() => {
-          if (iframe) {
-            iframe.src = currentSrc;
-          }
-        }, 100);
-      }
-    };
-
-    // Reload every 30 seconds to create continuous loop
-    // Adjust timing based on your video length (reload slightly before video ends)
-    const reloadInterval = setInterval(reloadVideo, 30000);
-
-    return () => {
-      clearInterval(reloadInterval);
-    };
-  }, []);
 
   return (
     <div className="app">
@@ -76,7 +47,6 @@ const Home: React.FC = () => {
           </div>
           <div className="hero-video">
             <iframe
-              ref={iframeRef}
               src="https://www.instagram.com/reel/DRqAYtQDrnB/embed/"
               width="100%"
               height="650"
