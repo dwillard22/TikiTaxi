@@ -1,0 +1,145 @@
+.rides-page {
+  min-height: calc(100vh - 80px);
+  padding: 2rem 1rem;
+  margin-top: 80px;
+  background: linear-gradient(135deg, #F4E4C1 0%, #A8D8D8 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.rides-container {
+  max-width: 600px;
+  width: 100%;
+  background: white;
+  border-radius: 20px;
+  padding: 3rem 2rem;
+  box-shadow: 0 10px 40px rgba(44, 124, 123, 0.15);
+}
+
+.rides-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.rides-header h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #2C7C7B;
+  margin-bottom: 0.5rem;
+}
+
+.rides-header p {
+  color: #5D4037;
+  font-size: 1.1rem;
+}
+
+.rides-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #2C7C7B;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  padding: 1rem;
+  border: 2px solid #A8D8D8;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: #F4E4C1;
+  color: #5D4037;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #F5A623;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(245, 166, 35, 0.1);
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #F5A623 0%, #E8734E 100%);
+  color: white;
+  border: none;
+  padding: 1.25rem 2rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.submit-button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(245, 166, 35, 0.3);
+}
+
+.submit-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.rides-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 2.5rem;
+  border-top: 2px solid #A8D8D8;
+}
+
+.info-card {
+  text-align: center;
+  padding: 1.5rem;
+  background: #F4E4C1;
+  border-radius: 12px;
+}
+
+.info-card h3 {
+  font-size: 0.9rem;
+  color: #2C7C7B;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.info-card p {
+  color: #5D4037;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.wait-time {
+  font-size: 1.5rem !important;
+  font-weight: 700 !important;
+  color: #F5A623 !important;
+}
+
+@media (max-width: 768px) {
+  .rides-container {
+    padding: 2rem 1.5rem;
+  }
+
+  .rides-header h1 {
+    font-size: 2rem;
+  }
+
+  .rides-info {
+    grid-template-columns: 1fr;
+  }
+}
+
