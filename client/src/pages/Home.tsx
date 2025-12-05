@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import tikiLogo from '../assets/TikiTaxiLogo.png';
 import '../App.css';
 
 const Home: React.FC = () => {
@@ -20,8 +21,9 @@ const Home: React.FC = () => {
       <header className="header">
         <nav className="nav">
           <div className="nav-brand">
-            <h1>🏝️ TikiTaxi</h1>
-          </div>
+          <img src={tikiLogo} alt="TikiTaxi logo" className="nav-logo" />
+          <h1>TikiTaxi</h1>
+        </div>
           <div className="nav-links">
             <Link to="/">Home</Link>
             <Link to="/login">Login</Link>
@@ -38,7 +40,8 @@ const Home: React.FC = () => {
               Your Safe Ride Around <span className="highlight">Hampton Beach</span>
             </h1>
             <p className="hero-subtitle">
-              Skip the walk, avoid the parking hassle, and get around Hampton Beach safely with our eco-friendly golf cart taxi service.
+              Hampton Beach’s Newest — and Most Fun — Way to Ride!    
+              Cruising ⬆️ & ⬇️ Ocean Blvd & Ashworth Ave in a 6-passenger street-legal golf cart!
             </p>
             <div className="hero-buttons">
               <button onClick={handleBookRide} className="primary-button">Book Your Ride Now</button>
@@ -46,20 +49,23 @@ const Home: React.FC = () => {
             </div>
           </div>
           <div className="hero-video">
-            <iframe
-              src="https://www.instagram.com/reel/DRqAYtQDrnB/embed/"
-              width="100%"
-              height="650"
-              style={{ border: 'none', overflow: 'hidden' }}
-              scrolling="no"
-              frameBorder="0"
-              allow="autoplay; encrypted-media"
-              allowFullScreen
-              title="TikiTaxi Instagram Reel"
-            ></iframe>
-          </div>
+          <iframe
+            src="https://www.facebook.com/plugins/video.php?href=https%3A%2F%2Fwww.facebook.com%2Freel%2F874494725157713%2F&show_text=false&width=500&height=650"
+            width="100%"
+            height="650"
+            style={{ border: "none", overflow: "hidden" }}
+            scrolling="no"
+            frameBorder={0}
+            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+            allowFullScreen
+            title="TikiTaxi Facebook Video"
+          /></div>
         </div>
       </section>
+
+
+
+
 
       {/* Features Section */}
       <section id="features" className="features">
@@ -132,8 +138,9 @@ const Home: React.FC = () => {
       <footer id="contact" className="footer">
         <div className="container">
           <div className="footer-content">
-            <div className="footer-section">
-              <h3>🏝️ TikiTaxi</h3>
+            <div className="footer-section"><h3> 
+              <img src={tikiLogo} alt="TikiTaxi logo" className="nav-logo" />
+              TikiTaxi</h3>
               <p>Your trusted golf cart taxi service in Hampton Beach, NH</p>
               <div className="social-links">
                 <a href="https://www.instagram.com/the_tiki_taxi/" target="_blank" rel="noopener noreferrer">
@@ -152,7 +159,8 @@ const Home: React.FC = () => {
             </div>
             <div className="footer-section">
               <h4>Contact</h4>
-              <p>Text us for rides or book online</p>
+              <p>(603)417-1817<br />
+                Text us for rides or book online</p>
             </div>
           </div>
           <div className="footer-bottom">
