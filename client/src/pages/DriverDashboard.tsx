@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import tikiLogo from '../assets/TikiTaxiLogo.png';
 import './DriverDashboard.css';
 import '../App.css';
 
@@ -58,7 +59,8 @@ const DriverDashboard: React.FC = () => {
         <nav className="nav">
           <div className="nav-brand">
             <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <h1>🏝️ TikiTaxi</h1>
+            <img src={tikiLogo} alt="TikiTaxi logo" className="nav-logo" />
+              <h1> TikiTaxi</h1>
             </Link>
           </div>
           <div className="nav-links">
