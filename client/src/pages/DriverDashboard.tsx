@@ -1,3 +1,5 @@
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import tikiLogo from '../assets/TikiTaxiLogo.png';
@@ -15,6 +17,24 @@ interface RideRequest {
 }
 
 const DriverDashboard: React.FC = () => {
+  const navigate = useNavigate();
+  const [driver, setDriver] = useState<any>(null);
+
+  useEffect(() => {
+    // Check if driver is logged in
+    const driverData = localStorage.getItem('driver');
+    if (!driverData) {
+      navigate('/driver/login');
+    } else {
+      setDriver(JSON.parse(driverData));
+    }
+  }, [navigate]);
+
+  const handleLogout = () => {
+    localStorage.removeItem('driver');
+    localStorage.removeItem('driverToken');
+    navigate('/');
+  };
   const [rideRequests, setRideRequests] = useState<RideRequest[]>([
     {
       id: '1',
@@ -53,6 +73,11 @@ const DriverDashboard: React.FC = () => {
   const pendingRequests = rideRequests.filter(r => r.status === 'pending');
   const activeRides = rideRequests.filter(r => r.status === 'accepted' || r.status === 'in-progress');
 
+  // Show loading or redirect if not logged in
+  if (!driver) {
+    return null;
+  }
+
   return (
     <div className="app">
       <header className="header">
@@ -65,7 +90,22 @@ const DriverDashboard: React.FC = () => {
           </div>
           <div className="nav-links">
             <Link to="/">Home</Link>
-            <Link to="/driver">Driver Dashboard</Link>
+            <span style={{ color: '#F5A623', fontWeight: 600 }}>Driver Portal</span>
+            <button 
+              onClick={handleLogout}
+              style={{
+                background: 'transparent',
+                border: '2px solid #E8734E',
+                color: '#E8734E',
+                padding: '0.5rem 1rem',
+                borderRadius: '8px',
+                cursor: 'pointer',
+                fontWeight: 600,
+                marginLeft: '1rem'
+              }}
+            >
+              Logout
+            </button>
           </div>
         </nav>
       </header>
@@ -74,7 +114,7 @@ const DriverDashboard: React.FC = () => {
         <div className="dashboard-container">
           <div className="dashboard-header">
             <h1>Driver Dashboard</h1>
-            <p>Manage your ride requests</p>
+            <p>Welcome, {driver?.name || 'Driver'}! Manage your ride requests</p>
           </div>
 
           {activeRides.length > 0 && (
