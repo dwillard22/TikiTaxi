@@ -5,7 +5,7 @@ import './Auth.css';
 import '../App.css';
 
 // Component that uses Google OAuth hook (must be inside provider)
-const GoogleLoginButton: React.FC<{ onError: (error: string) => void }> = ({ onError }) => {
+const GoogleDriverLoginButton: React.FC<{ onError: (error: string) => void }> = ({ onError }) => {
   const navigate = useNavigate();
 
   const handleGoogleSuccess = async (response: any) => {
@@ -25,12 +25,14 @@ const GoogleLoginButton: React.FC<{ onError: (error: string) => void }> = ({ onE
       }
 
       const data = await authResponse.json();
-      localStorage.setItem('user', JSON.stringify(data.user));
-      localStorage.setItem('authToken', response.access_token);
-      navigate('/rides');
+      // Mark user as driver
+      const driverUser = { ...data.user, role: 'driver' };
+      localStorage.setItem('driver', JSON.stringify(driverUser));
+      localStorage.setItem('driverToken', response.access_token);
+      navigate('/driver');
     } catch (err: any) {
       onError('Failed to login with Google. Please try again.');
-      console.error('Google login error:', err);
+      console.error('Google driver login error:', err);
     }
   };
 
@@ -61,7 +63,7 @@ const GoogleLoginButton: React.FC<{ onError: (error: string) => void }> = ({ onE
 };
 
 // Fallback button when Google OAuth is not configured
-const GoogleLoginButtonFallback: React.FC<{ onError: (error: string) => void }> = ({ onError }) => {
+const GoogleDriverLoginButtonFallback: React.FC<{ onError: (error: string) => void }> = ({ onError }) => {
   return (
     <button
       type="button"
@@ -81,7 +83,7 @@ const GoogleLoginButtonFallback: React.FC<{ onError: (error: string) => void }> 
   );
 };
 
-const LoginContent: React.FC<{ hasGoogleAuth: boolean }> = ({ hasGoogleAuth }) => {
+const DriverLoginContent: React.FC<{ hasGoogleAuth: boolean }> = ({ hasGoogleAuth }) => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -107,11 +109,13 @@ const LoginContent: React.FC<{ hasGoogleAuth: boolean }> = ({ hasGoogleAuth }) =
       }
 
       const data = await authResponse.json();
-      localStorage.setItem('user', JSON.stringify(data.user));
-      navigate('/rides');
+      // Mark user as driver
+      const driverUser = { ...data.user, role: 'driver' };
+      localStorage.setItem('driver', JSON.stringify(driverUser));
+      navigate('/driver');
     } catch (err: any) {
       setError('Failed to login with Apple. Please try again.');
-      console.error('Apple login error:', err);
+      console.error('Apple driver login error:', err);
     }
   };
 
@@ -126,8 +130,8 @@ const LoginContent: React.FC<{ hasGoogleAuth: boolean }> = ({ hasGoogleAuth }) =
           </div>
           <div className="nav-links">
             <Link to="/">Home</Link>
-            <Link to="/login">Login</Link>
-            <Link to="/signup" className="cta-button">Sign Up</Link>
+            <Link to="/login">Rider Login</Link>
+            <Link to="/driver/login">Driver Login</Link>
           </div>
         </nav>
       </header>
@@ -135,17 +139,17 @@ const LoginContent: React.FC<{ hasGoogleAuth: boolean }> = ({ hasGoogleAuth }) =
       <div className="auth-page">
         <div className="auth-container">
           <div className="auth-header">
-            <h1>Welcome Back</h1>
-            <p>Login to book your ride</p>
+            <h1>Driver Portal</h1>
+            <p>Login to access your driver dashboard</p>
           </div>
 
           {error && <div className="error-message">{error}</div>}
 
           <div className="oauth-buttons">
             {hasGoogleAuth ? (
-              <GoogleLoginButton onError={setError} />
+              <GoogleDriverLoginButton onError={setError} />
             ) : (
-              <GoogleLoginButtonFallback onError={setError} />
+              <GoogleDriverLoginButtonFallback onError={setError} />
             )}
 
             <button
@@ -162,9 +166,9 @@ const LoginContent: React.FC<{ hasGoogleAuth: boolean }> = ({ hasGoogleAuth }) =
 
           <div className="auth-footer">
             <p>
-              Don't have an account?{' '}
-              <Link to="/signup" className="auth-link">
-                Sign up here
+              Not a driver?{' '}
+              <Link to="/login" className="auth-link">
+                Login as rider
               </Link>
             </p>
           </div>
@@ -174,21 +178,21 @@ const LoginContent: React.FC<{ hasGoogleAuth: boolean }> = ({ hasGoogleAuth }) =
   );
 };
 
-const Login: React.FC = () => {
+const DriverLogin: React.FC = () => {
   // You'll need to add your Google OAuth Client ID to environment variables
   const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID || '';
 
   // If no client ID, render without GoogleOAuthProvider
   if (!clientId) {
-    return <LoginContent hasGoogleAuth={false} />;
+    return <DriverLoginContent hasGoogleAuth={false} />;
   }
 
   return (
     <GoogleOAuthProvider clientId={clientId}>
-      <LoginContent hasGoogleAuth={true} />
+      <DriverLoginContent hasGoogleAuth={true} />
     </GoogleOAuthProvider>
   );
 };
 
-export default Login;
+export default DriverLogin;
 

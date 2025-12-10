@@ -4,6 +4,7 @@ import Rides from './pages/Rides';
 import DriverDashboard from './pages/DriverDashboard';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
+import DriverLogin from './pages/DriverLogin';
 import './App.css';
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/rides" element={<Rides />} />
         <Route path="/driver" element={<DriverDashboard />} />
+        <Route path="/driver/login" element={<DriverLogin />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
       </Routes>

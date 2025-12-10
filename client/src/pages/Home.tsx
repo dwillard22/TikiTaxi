@@ -26,6 +26,7 @@ const Home: React.FC = () => {
             <Link to="/">Home</Link>
             <Link to="/login">Login</Link>
             <Link to="/signup" className="cta-button">Sign Up</Link>
+            <Link to="/driver/login" className="cta-button">Driver Portal</Link>
           </div>
         </nav>
       </header>
