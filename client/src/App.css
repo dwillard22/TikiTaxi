@@ -125,6 +125,8 @@ body {
   z-index: 1;
 }
 
+
+
 .nav-brand h1 {
   font-family: 'Luckiest Guy', 'Cooper Black', 'Chunk Five', cursive;
   font-size: 2.2rem;
@@ -152,6 +154,20 @@ body {
   transform: rotate(1deg) scale(1.05);
   filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.4));
 }
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* space between logo & title */
+}
+  
+.nav-logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
 
 .nav-links {
   display: flex;
@@ -259,28 +275,22 @@ body {
 
 .hero-video {
   position: relative;
-  overflow: hidden;
   width: 100%;
   max-width: 500px;
+  height: 650px; /* Facebook videos fit better here */
   margin-left: auto;
-  height: 700px;
   border-radius: 12px;
+  overflow: hidden;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
 }
 
 .hero-video iframe {
   width: 100%;
-  max-width: 500px;
-  min-width: 400px;
+  height: 90%;
   border-radius: 12px;
-  /* Clip top (header) and middle (buttons), keep bottom (view profile) */
-  clip-path: inset(65px 0 0 0);
-  -webkit-clip-path: inset(65px 0 0 0);
-  margin-top: -65px;
-  height: 720px;
-  overflow: hidden;
+  border: none;
 }
 
 .hero-title {
@@ -671,18 +681,6 @@ body {
   .hero-text {
     text-align: center;
   }
-
-  .hero-video {
-    order: -1;
-    max-width: 100%;
-    height: 600px;
-    margin: 0 auto;
-  }
-
-  .hero-video .instagram-media {
-    max-width: 100% !important;
-    min-width: 300px !important;
-  }
   
   .hero-title {
     font-size: 2.2rem;
@@ -732,6 +730,9 @@ body {
 
   .nav-brand h1 {
     font-size: 1.5rem;
+  }
+  nav-logo {
+    height: 36px;
   }
 }
 
