@@ -33,3 +33,5 @@ keys/
 *.njsproj
 *.sln
 *.sw?
+
+.env
