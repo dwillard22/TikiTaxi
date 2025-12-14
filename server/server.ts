@@ -5,10 +5,17 @@ import dotenv from "dotenv";
 import { OAuth2Client } from "google-auth-library";
 import jwt from "jsonwebtoken";
 
+// MONGODB
+import connectDB from "./config/db";
+import rideRoutes from "./routes/rideRoutes";
+
 dotenv.config();
 const app = express();
 app.use(express.json());
 app.use(cookieParser());
+
+// Connect to MongoDB
+connectDB();
 
 const CLIENT_ID = process.env.GOOGLE_CLIENT_ID!;
 const JWT_SECRET = process.env.JWT_SECRET!; // your own JWT secret
@@ -77,5 +84,8 @@ app.post("/api/auth/google", async (req, res) => {
     return res.status(401).json({ error: "Invalid token" });
   }
 });
+
+// MongoDB routes here
+app.use("/api/rides", rideRoutes);
 
 app.listen(process.env.PORT || 4000, () => console.log("Server started"));
