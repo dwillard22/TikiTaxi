@@ -13,16 +13,18 @@ export const requireAuth = (
   res: Response,
   next: NextFunction
 ) => {
-  const authHeader = req.headers.authorization;
+  console.log("AUTH HEADER:", req.headers.authorization);
 
-  if (!authHeader?.startsWith("Bearer ")) {
-    return res.status(401).json({ message: "Unauthorized" });
+  if (!req.headers.authorization?.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "No auth header" });
   }
 
-  const token = authHeader.split(" ")[1];
+  const token = req.headers.authorization.split(" ")[1];
+  console.log("TOKEN RECEIVED:", token);
 
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as any;
+    console.log("DECODED TOKEN:", decoded);
 
     req.user = {
       name: decoded.name,
@@ -30,7 +32,8 @@ export const requireAuth = (
     };
 
     next();
-  } catch {
+  } catch (err) {
+    console.error("JWT ERROR:", err);
     return res.status(401).json({ message: "Invalid token" });
   }
 };

@@ -24,11 +24,33 @@ const Rides: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // TODO: Connect to backend API
+
+    // API call to submit ride request
+    const user = JSON.parse(localStorage.getItem("user") || "{}");
+
+    const ride = {
+      pickup,
+      destination,
+      phone,
+      passengerName: user.name,
+      passengerEmail: user.email,
+    };
+    try {
+      await fetch("http://localhost:3000/api/rides", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(ride),
+      });
+      console.log("Ride request submitted successfully");
+    } catch (error) {
+      console.error("Error submitting ride request:", error);
+    }
 
     setTimeout(() => {
       setIsSubmitting(false);
-      alert("Ride request submitted! You will receive a confirmation shortly.");
+      // alert("Ride request submitted! You will receive a confirmation shortly.");
       setPickup("");
       setDestination("");
       setPhone("");

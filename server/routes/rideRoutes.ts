@@ -8,11 +8,18 @@ const router = Router();
  * POST /api/rides
  * Create a new ride request
  */
-router.post("/", requireAuth, async (req: AuthRequest, res) => {
+router.post("/", async (req, res) => {
   try {
-    const { pickup, destination, phone } = req.body;
+    const { pickup, destination, phone, passengerName, passengerEmail } =
+      req.body;
 
-    if (!pickup || !destination || !phone) {
+    if (
+      !pickup ||
+      !destination ||
+      !phone ||
+      !passengerName ||
+      !passengerEmail
+    ) {
       return res.status(400).json({ message: "Missing ride info" });
     }
 
@@ -20,12 +27,13 @@ router.post("/", requireAuth, async (req: AuthRequest, res) => {
       pickup,
       destination,
       phone,
-      passengerName: req.user!.name,
-      passengerEmail: req.user!.email,
+      passengerName,
+      passengerEmail,
     });
 
     res.status(201).json(ride);
   } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Failed to create ride" });
   }
 });
