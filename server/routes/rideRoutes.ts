@@ -1,6 +1,5 @@
 import { Router } from "express";
 import Ride from "../models/Ride";
-import { requireAuth, AuthRequest } from "../middleware/auth";
 
 const router = Router();
 
@@ -29,6 +28,7 @@ router.post("/", async (req, res) => {
       phone,
       passengerName,
       passengerEmail,
+      status: "pending", // Corrected field name
     });
 
     res.status(201).json(ride);
@@ -40,18 +40,23 @@ router.post("/", async (req, res) => {
 
 /**
  * GET /api/rides
- * Fetch all pending rides
+ * Fetch all rides
  */
 router.get("/", async (_req, res) => {
-  const rides = await Ride.find().sort({ createdAt: -1 });
-  res.json(rides);
+  try {
+    const rides = await Ride.find().sort({ createdAt: -1 });
+    res.json(rides);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to fetch rides" });
+  }
 });
 
 /**
  * DELETE /api/rides/:id
- * Delete ride once accepted
+ * Delete a ride by its ID (e.g., when accepted)
  */
-router.delete("/:id", requireAuth, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const ride = await Ride.findByIdAndDelete(req.params.id);
 
@@ -59,8 +64,9 @@ router.delete("/:id", requireAuth, async (req, res) => {
       return res.status(404).json({ message: "Ride not found" });
     }
 
-    res.json({ message: "Ride accepted and removed" });
-  } catch {
+    res.json({ message: "Ride deleted", ride });
+  } catch (error) {
+    console.error(error);
     res.status(500).json({ message: "Failed to delete ride" });
   }
 });
