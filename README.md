@@ -7,9 +7,9 @@ This is a  website project for Tikitaxi a local taxi company based in Hampton NH
 &nbsp;
 
 **Team**  
-Dominic Willard - Front end  
-Sam Adams - Back end  
-Collins Kibet - Front End  
+Dominic Willard - Full Stack 
+Sam Adams - Full Stack 
+Collins Kibet - Full Stack 
 
 ______________________________________
 
