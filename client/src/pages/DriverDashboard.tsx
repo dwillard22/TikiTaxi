@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import tikiLogo from "../assets/TikiTaxiLogo.png";
+import tikiTaxiLogo from "../assets/TikiTaxiLogo.png";
 import "./DriverDashboard.css";
 import "../App.css";
 
@@ -73,10 +73,10 @@ const DriverDashboard: React.FC = () => {
       <header className="header">
         <nav className="nav">
           <div className="nav-brand">
-            <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
-              <img src={tikiLogo} alt="TikiTaxi logo" className="nav-logo" />
-              <h1> TikiTaxi</h1>
-            </Link>
+            <h1>
+              <img src={tikiTaxiLogo} alt="TikiTaxi logo" className="nav-logo" />
+              TikiTaxi
+            </h1>
           </div>
           <div className="nav-links">
             <Link to="/">Home</Link>
@@ -85,16 +85,8 @@ const DriverDashboard: React.FC = () => {
             </span>
             <button
               onClick={handleLogout}
-              style={{
-                background: "transparent",
-                border: "2px solid #E8734E",
-                color: "#E8734E",
-                padding: "0.5rem 1rem",
-                borderRadius: "8px",
-                cursor: "pointer",
-                fontWeight: 600,
-                marginLeft: "1rem",
-              }}
+              className="cta-button logout-button"
+              style={{ marginLeft: "0.5rem" }}
             >
               Logout
             </button>

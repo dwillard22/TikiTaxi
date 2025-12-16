@@ -160,6 +160,14 @@ body {
   align-items: center;
   gap: 12px; /* space between logo & title */
 }
+
+.nav-brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: inherit;
+  text-decoration: none;
+}
   
 .nav-logo {
   height: 48px;

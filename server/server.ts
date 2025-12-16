@@ -9,7 +9,7 @@ import jwt from "jsonwebtoken";
 import connectDB from "./config/db";
 import rideRoutes from "./routes/rideRoutes";
 
-dotenv.config();
+dotenv.config({ path: './.env' });
 const app = express();
 app.use(express.json());
 app.use(cookieParser());

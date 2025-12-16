@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google';
+import tikiTaxiLogo from '../assets/TikiTaxiLogo.png';
 import './Auth.css';
 import '../App.css';
 
@@ -124,8 +125,9 @@ const DriverLoginContent: React.FC<{ hasGoogleAuth: boolean }> = ({ hasGoogleAut
       <header className="header">
         <nav className="nav">
           <div className="nav-brand">
-            <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-              <h1>🏝️ TikiTaxi</h1>
+            <Link to="/" className="nav-brand-link">
+              <img src={tikiTaxiLogo} alt="TikiTaxi logo" className="nav-logo" />
+              <h1>TikiTaxi</h1>
             </Link>
           </div>
           <div className="nav-links">
